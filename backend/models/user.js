@@ -1,16 +1,15 @@
-"use strict";
-const { Model } = require("sequelize");
-module.exports = (sequelize, DataTypes) => {
-  class User extends Model {}
-  User.init(
-    {
-      email: { type: DataTypes.STRING, unique: true },
-      password: DataTypes.STRING,
-    },
-    {
-      sequelize,
-      modelName: "User",
-    }
-  );
-  return User;
-};
+const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
+
+
+// User Schema
+const userSchema = mongoose.Schema({
+  firstname: { type: String, required: true },
+  lastname: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
+
+userSchema.plugin(uniqueValidator);
+
+module.exports = mongoose.model('User', userSchema);
