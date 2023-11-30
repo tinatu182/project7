@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path') // used to pathing the app
-// const userRouter = require('./routes/user');
+const userRouter = require('./routes/user');
 // const sauceRouter = require('./routes/sauce');
 const app = express();
 // require('./models').init();
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // app.use('/api/sauces', sauceRouter);
-// app.use('/api/auth', userRouter);
+app.use('/api/auth', userRouter);
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
 module.exports = app;

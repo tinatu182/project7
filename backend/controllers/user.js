@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const {User} = require("../models");
 
 // Signup user
 exports.signUp = (req, res, next) => {
@@ -8,8 +8,8 @@ exports.signUp = (req, res, next) => {
         .hash(req.body.password, 10)
         .then((hash) => {
             const user = new User({
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
                 email: req.body.email,
                 password: hash,
             });
@@ -43,9 +43,14 @@ exports.logIn = (req, res, next) => {
                         }),
                     });
                 })
-                .catch((error) => res.status(500).json({ error }));
-        })
-        .catch((error) => res.status(500).json({ error }));
+                .catch((error) => {
+                    console.log("error", error)
+                    res.status(500).json({ error })
+                })})
+        .catch((error) => {
+            console.log("error", error)
+            res.status(500).json({ error })
+        });
 };
 
 exports.deleteUser = (req, res, next) => {

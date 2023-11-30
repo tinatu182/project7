@@ -9,6 +9,7 @@ export const Signup = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(email)
+        // TODO use fetch api to submit post request to sign up the user look on proj 5
     }
 
     return (

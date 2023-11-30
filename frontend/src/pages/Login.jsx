@@ -7,6 +7,7 @@ export const Login = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(email)
+        // TODO fetch api to submit post request for log in user look on proj 5
     }
 
     return (
