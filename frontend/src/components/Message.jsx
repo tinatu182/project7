@@ -17,14 +17,14 @@ const Message = ({ message, onDelete, onLike, onComment }) => {
       content: editContent ? editContent : message.content,
     };
 
-    axios.put(config.BACK_URL + "/messages/" + message._id, data, config.axios);
+    axios.put(config.BACK_URL + "/messages/" + message.id, data, config.axios);
 
     setIsEditing(false);
   };
 
   const likeClick = () => {
     let param = {
-      messageId: message._id,
+      messageId: message.id,
     };
 
     axios

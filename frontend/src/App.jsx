@@ -17,7 +17,7 @@ const App = () => {
     setfirstName(user.firstName);
     setlastName(user.lastName);
     setImage(user.imageUrl);
-    setUserId(user._id);
+    setUserId(user.id);
     setisAdmin(user.isAdmin);
   };
 

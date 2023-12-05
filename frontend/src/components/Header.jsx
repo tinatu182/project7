@@ -7,7 +7,7 @@ import tools from "../tools";
 import config from "../config";
 import HeaderMenu from "./HeaderMenu";
 
-const Header = ({ showSearch, setShowSearch, darkmode, setDarkmode }) => {
+const Header = ({ showSearch, setShowSearch }) => {
   const handleLogout = () => {
     tools.setCookie(config.APP_NAME + "-token", "");
   };
@@ -18,13 +18,7 @@ const Header = ({ showSearch, setShowSearch, darkmode, setDarkmode }) => {
     <header className={`${styles.header} d-flex flex-row align-items-center  `}>
       <img className="logo" src={logo} alt="logo groupomania" />
       <div t className="flex-fill"></div>
-      <i
-        onClick={() => setDarkmode(!darkmode)}
-        onKeyDown={() => setDarkmode(!darkmode)}
-        className={`${darkmode ? "fa-solid fa-lightbulb btn-round-dark " : "fa-regular fa-lightbulb btn-round-dark "} ${styles.darkBtn}  `}
-        aria-label="activate dark mode"
-        tabIndex={1}
-      ></i>
+
       <i
         onClick={() => setShowSearch(!showSearch)}
         onKeyDown={() => setShowSearch(!showSearch)}

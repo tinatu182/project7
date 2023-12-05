@@ -19,7 +19,7 @@ const MessageComments = ({ message, onComment }) => {
     });
 
     axios
-      .patch(config.BACK_URL + `/messages/comment-post/${message._id}`, data, config.axios)
+      .patch(config.BACK_URL + `/messages/comment-post/${message.id}`, data, config.axios)
       .then(function () {
         setText("");
         onComment();
@@ -35,7 +35,7 @@ const MessageComments = ({ message, onComment }) => {
     });
 
     axios
-      .patch(config.BACK_URL + `/messages/delete-comment-post/${message._id}`, data, config.axios)
+      .patch(config.BACK_URL + `/messages/delete-comment-post/${message.id}`, data, config.axios)
       .then(function (response) {
         onComment();
       })
@@ -48,7 +48,7 @@ const MessageComments = ({ message, onComment }) => {
     <div className={styles.commentsContainer}>
       {message.comments.map((comment) => {
         return (
-          <div className={styles.commentsBox} key={comment._id}>
+          <div className={styles.commentsBox} key={comment.id}>
             <div className={styles.userBox}>
               <div className={styles.leftPart}>
                 <pre></pre>
@@ -63,7 +63,7 @@ const MessageComments = ({ message, onComment }) => {
 
                 {userId === comment.commenterId || isAdmin === true ? (
                   <div className={styles.btnDelete}>
-                    <button className="btn-edit" onClick={(e) => handleDelete(comment._id)} aria-label="delete your comment">
+                    <button className="btn-edit" onClick={(e) => handleDelete(comment.id)} aria-label="delete your comment">
                       <i className="fa-sharp fa-solid fa-trash" tabIndex={10}></i>
                     </button>
                   </div>

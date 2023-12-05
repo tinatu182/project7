@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const {User} = require("../models");
+const { User } = require("../models");
 
 // Signup user
 exports.signUp = (req, res, next) => {
@@ -16,7 +16,7 @@ exports.signUp = (req, res, next) => {
             user
                 .save()
                 .then(() => res.status(201).json({ message: "user created !" }))
-                .catch((error) =>{
+                .catch((error) => {
                     console.log("ererehre ", error)
                     res.status(400).json({ error: "email address already in use" })
                 });
@@ -26,7 +26,7 @@ exports.signUp = (req, res, next) => {
 
 // Login user
 exports.logIn = (req, res, next) => {
-    User.findOne({where :{ email: req.body.email }})
+    User.findOne({ where: { email: req.body.email } })
         .then((user) => {
             if (!user) {
                 return res.status(403).json({ error: "invalid user" });
@@ -39,7 +39,7 @@ exports.logIn = (req, res, next) => {
                     }
                     res.status(200).json({
                         user: user,
-                        token: jwt.sign({ userId: user._id }, process.env.KEY, {
+                        token: jwt.sign({ userId: user.id }, process.env.KEY, {
                             expiresIn: "24h",
                         }),
                     });
@@ -47,7 +47,8 @@ exports.logIn = (req, res, next) => {
                 .catch((error) => {
                     console.log("error", error)
                     res.status(500).json({ error })
-                })})
+                })
+        })
         .catch((error) => {
             console.log("error", error)
             res.status(500).json({ error })
@@ -55,9 +56,9 @@ exports.logIn = (req, res, next) => {
 };
 
 exports.deleteUser = (req, res, next) => {
-    User.findOne({ _id: req.params.id }).then((user) => {
+    User.findOne({ where: { id: req.params.id } }).then((user) => {
         user
-            .deleteOne({ _id: req.params.id })
+            .destroy()
             .then(() => {
                 res.status(200).json({ message: "user deleted !" });
             })

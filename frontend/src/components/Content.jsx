@@ -49,9 +49,9 @@ const Content = ({ data, onSent, showSearch, darkmode }) => {
 
             .map((message) => (
               <Message
-                key={message._id}
+                key={message.id}
                 message={message}
-                onDelete={() => handleDelete(message._id)}
+                onDelete={() => handleDelete(message.id)}
                 onLike={() => handleLike()}
                 onComment={() => handleComment()}
               />
