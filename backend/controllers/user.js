@@ -16,16 +16,17 @@ exports.signUp = (req, res, next) => {
             user
                 .save()
                 .then(() => res.status(201).json({ message: "user created !" }))
-                .catch((error) =>
+                .catch((error) =>{
+                    console.log("ererehre ", error)
                     res.status(400).json({ error: "email address already in use" })
-                );
+                });
         })
         .catch((error) => res.status(500).json({ error }));
 };
 
 // Login user
 exports.logIn = (req, res, next) => {
-    User.findOne({ email: req.body.email })
+    User.findOne({where :{ email: req.body.email }})
         .then((user) => {
             if (!user) {
                 return res.status(403).json({ error: "invalid user" });

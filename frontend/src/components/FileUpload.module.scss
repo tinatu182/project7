@@ -1,0 +1,26 @@
+.card {
+  .inputFile[type="file"] {
+    display: none;
+  }
+
+  label {
+    cursor: pointer;
+    color: white;
+    background-color: var(--primary);
+    padding: 8px;
+    border-radius: 50%;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  button {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    z-index: 1;
+  }
+}

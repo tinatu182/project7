@@ -1,0 +1,91 @@
+@use "../assets/styles/mixins" as mixin;
+
+.backgroundFormDark {
+  background-color: var(--gray-2);
+}
+
+.form {
+  height: 250px;
+  width: 650px;
+  cursor: pointer;
+  text-align: center;
+  margin: 30px auto 0px;
+
+  @include mixin.lg-lt {
+    width: 500px;
+  }
+  @include mixin.sm-lt {
+    width: 400px;
+  }
+  @include mixin.xs {
+    width: 350px;
+  }
+
+  .formContainer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .textFormDark {
+    text-align: left;
+    border: none;
+    outline: none;
+    width: 80%;
+    resize: none;
+    overflow: hidden;
+    font-size: 15px;
+    padding-top: 20px;
+    background-color: var(--gray-2);
+
+    @include mixin.sm-lt {
+      padding-left: 15px;
+    }
+    @include mixin.xs {
+      padding-left: 15px;
+      font-size: 13px;
+    }
+  }
+
+  .textForm {
+    text-align: left;
+    border: none;
+    outline: none;
+    width: 80%;
+    resize: none;
+    overflow: hidden;
+    font-size: 15px;
+    padding-top: 20px;
+
+    @include mixin.sm-lt {
+      padding-left: 15px;
+    }
+    @include mixin.xs {
+      padding-left: 15px;
+      font-size: 13px;
+    }
+  }
+
+  .submitBtn {
+    cursor: pointer;
+    margin: auto;
+    font-size: 15px;
+  }
+
+  .userimg {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+.gifLoader {
+  color: white;
+  background-color: var(--primary);
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+}

@@ -1,0 +1,77 @@
+@use "../assets/styles/mixins" as mixin;
+
+.commentsContainer {
+  width: 95%;
+  padding: 20px;
+
+  .commentsBox {
+    padding: 10px 0;
+
+    .userBox {
+      display: flex;
+
+      .commenterPseudo {
+        font-weight: 700;
+        font-size: 14px;
+      }
+    }
+    .rightPart {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      padding-left: 10px;
+    }
+    .textBox {
+      width: 60px;
+    }
+    .commenterText {
+      font-size: 14px;
+    }
+
+    .userImg {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 15px;
+      @include mixin.sm-lt {
+        width: 57px;
+        height: 57px;
+      }
+    }
+  }
+  .commentForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .textForm {
+    text-align: left;
+    line-height: 35px;
+    padding-left: 5px;
+    border: none;
+    outline: none;
+    width: 75%;
+    resize: none;
+    overflow: hidden;
+    font-size: 14px;
+    height: 40px;
+    background-color: var(--gray-2);
+    @include mixin.sm-lt {
+      font-size: 12px;
+      width: 70%;
+      height: 35px;
+      line-height: 30px;
+    }
+  }
+
+  .submitBtn {
+    cursor: pointer;
+    @include mixin.sm-lt {
+      padding: 10px;
+      height: 35px;
+      line-height: 10px;
+    }
+  }
+}

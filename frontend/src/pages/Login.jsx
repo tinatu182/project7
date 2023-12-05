@@ -1,26 +1,103 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
+import axios from "axios";
+import config from "../config";
+import styles from "./Login.module.scss";
+import tools from "../tools";
+import logo from "../assets/images/icon-left-font-monochrome-white.png";
+import backgroundImg from "../assets/images/background.jpg";
+import Error from "../components/Error";
 
-export const Login = (props) => {
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
+const Login = () => {
+  const emailRef = useRef();
+  const [email, setEmail] = useState("Tinatu@test.com");
+  const [password, setPassword] = useState("Henry123");
+  const [error, setError] = useState();
+  const [success, setSuccess] = useState(false);
+  const { displayUser } = useContext(AppContext);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(email)
-        // TODO fetch api to submit post request for log in user look on proj 5
-    }
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
 
-    return (
-        <div className="auth-form-container">
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <label for="email">email</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="youremail@gmail.com" id="email" name="email" />
-                <label for="password">password</label>
-                <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="*****" id="password" name="password" />
-                <button>Log In</button>
-            </form>
-            <button onClick={() => props.onFormSwitch('register')}>Don't have an account? Sign up here</button>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    axios
+      .post(config.BACK_URL + "/auth/login", JSON.stringify({ email, password }), {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((res) => {
+        let data = res.data;
+
+        /** Save token in config module */
+        config.axios.headers.Authorization = data.token;
+
+        /** Save token in cookie for session persistence */
+        tools.setCookie("groupomania-token", data.token, 86400000);
+
+        /** Call "displayuser" to pass values to Use Context  */
+        displayUser(data.user);
+        setPassword("");
+        setSuccess(true);
+      })
+      .catch((error) => setError(error.response.data.error));
+  };
+
+  const navigate = useNavigate();
+
+  return success ? (
+    setTimeout(() => {
+      navigate("/");
+    }, 200)
+  ) : (
+    <div className={styles.background}>
+      <img className={styles.backgroundImg} src={backgroundImg} alt="lines" />
+      <form onSubmit={handleSubmit} className={styles.loginForm}>
+        <img className={styles.logo} src={logo} alt="logo groupomania" />
+        <h1 className={`mb-20 ${styles.title}`}>Login</h1>
+        <div className="d-flex flex-column mb-20">
+          <input
+            className={styles.loginInput}
+            id="email"
+            type="email"
+            placeholder="Email"
+            ref={emailRef}
+            autoComplete="off"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            required
+            aria-label="Request your email address"
+          />
         </div>
-    )
-}
+
+        <div className="d-flex flex-column ">
+          <input
+            className={styles.loginInput}
+            id="password"
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            required
+            aria-label="Enter your password"
+          />
+        </div>
+
+        <Error error={error} />
+
+        <button className={`btn btn-primary ${styles.btnConnection}`} aria-label="Sign in">
+        Log In{" "}
+        </button>
+
+        <NavLink to="/signup">
+          <p className={styles.link} aria-label="Go to the registration page">
+          Create your account
+          </p>
+        </NavLink>
+      </form>
+    </div>
+  );
+};
+
+export default Login;

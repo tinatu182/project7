@@ -1,0 +1,71 @@
+.btn {
+  padding: 8px 15px;
+  border-radius: 2px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  border: 1px solid var(--primary);
+}
+
+.btn-reverse-primary {
+  background-color: white;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btn-edit {
+  color: var(--primary);
+  background-color: white;
+  border: solid 1px white;
+  font-size: 15px;
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--gray-2);
+    border-radius: 50%;
+  }
+}
+
+.btn-round {
+  color: var(--primary);
+  background-color: white;
+  border: solid 1px var(--primary);
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    color: white;
+    background-color: var(--primary);
+    border-radius: 50%;
+    transition: 0.2s;
+  }
+}
+
+.btn-round-dark {
+  color: var(--primary);
+  background-color: white;
+  border: solid 1px var(--primary);
+  border-radius: 50%;
+  padding: 10px 11px;
+  cursor: pointer;
+  &:hover {
+    color: white;
+    background-color: var(--primary);
+    border-radius: 50%;
+    transition: 0.2s;
+  }
+}
+
+.card {
+  background-color: white;
+}
+
+.text-primary {
+  color: var(--primary);
+}

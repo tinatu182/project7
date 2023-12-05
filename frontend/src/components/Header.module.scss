@@ -1,0 +1,69 @@
+@use "../assets/styles/mixins" as mixin;
+
+.header {
+  padding: 10px 20px;
+  border-bottom: 2px solid var(--gray-2);
+  color: var(text-color);
+  height: 80px;
+  position: relative;
+  @include mixin.sm-lt {
+    padding: 0;
+    height: 60px;
+  }
+
+  img {
+    width: 210px;
+
+    @include mixin.sm-lt {
+      width: 180px;
+    }
+
+    @include mixin.xs {
+      width: 160px;
+      margin-left: 25px;
+    }
+  }
+  .headerList {
+    @include mixin.xs {
+      display: none;
+    }
+  }
+
+  .searchGlass {
+    margin-right: 15px;
+
+    font-size: 14px;
+    @include mixin.sm-lt {
+      font-size: 12px;
+      margin-right: 10px;
+    }
+  }
+
+  .darkBtn {
+    margin-right: 15px;
+
+    font-size: 16px;
+    @include mixin.sm-lt {
+      font-size: 12px;
+      margin-right: 10px;
+    }
+  }
+
+  .headerXs {
+    display: none;
+    cursor: pointer;
+    margin-right: 25px;
+    font-size: 20px;
+
+    @include mixin.xs {
+      display: block;
+    }
+  }
+
+  button {
+    width: 130px;
+    @include mixin.sm-lt {
+      margin-right: 10px;
+    }
+  }
+}
