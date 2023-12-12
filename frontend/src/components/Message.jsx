@@ -55,11 +55,8 @@ const Message = ({ message, onDelete, onLike, onComment }) => {
         <img className={`${styles.userImg}`} src={message.userImage} alt="avatar" />
         <div className={styles.signature}>
           <div className={styles.signatureName}>
-            <b>{message.userfirstName} </b>
-            <b>{message.userlastName + ", "}</b>
-          </div>
-          <div className={styles.signatureDate}>
-            <em>{formatDate(message.date)}</em>
+            <b>{message.firstName} </b>
+            <b>{message.lastName}</b>
           </div>
         </div>
         <div className={`mr-15 ${styles.editBtn}`}></div>
@@ -73,11 +70,11 @@ const Message = ({ message, onDelete, onLike, onComment }) => {
         {isEditing ? (
           <textarea
             className={styles.textMessage}
-            defaultValue={editContent ? editContent : message.content}
+            defaultValue={editContent ? editContent : message.authMsg}
             onChange={(e) => setEditContent(e.target.value)}
           ></textarea>
         ) : (
-          <p className={styles.textMessage}>{editContent ? editContent : message.content}</p>
+          <p className={styles.textMessage}>{editContent ? editContent : message.authMsg}</p>
         )}
 
         {message.imageUrl ? (
@@ -89,16 +86,6 @@ const Message = ({ message, onDelete, onLike, onComment }) => {
         )}
 
         <div className={`${styles.commentsLikesBox} p-30`}>
-          <div>
-            <i
-              tabIndex={7}
-              onClick={() => likeClick()}
-              onKeyDown={() => likeClick()}
-              className={`fa-regular fa-heart mr-5 ${message.usersLiked.includes(userId) ? "text-primary" : ""}`}
-              aria-label="like the post"
-            ></i>
-            <span>{message.usersLiked.length ? message.usersLiked.length : ""}</span>
-          </div>
           <div>
             <i
               onClick={() => setShowComments(!showComments)}

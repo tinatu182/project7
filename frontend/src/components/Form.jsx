@@ -14,9 +14,9 @@ const Form = ({ onSent, darkmode }) => {
     e.preventDefault();
     let data = new FormData();
     data.append("image", files);
-    data.append("content", content);
-    data.append("userfirstName", firstName);
-    data.append("userlastName", lastName);
+    data.append("authMsg", content);
+    data.append("firstName", firstName);
+    data.append("lastName", lastName);
     data.append("userImage", image);
     data.append("userId", userId);
 

@@ -12,9 +12,10 @@ const MessageComments = ({ message, onComment }) => {
     e.preventDefault();
 
     const data = JSON.stringify({
-      commenterId: userId,
-      commenterPseudo: firstName + " " + lastName,
-      text: text,
+      firstName: firstName,
+      lastName: lastName,
+      comment: text,
+      postID: message.id,
       commenterImage: image,
     });
 
@@ -82,7 +83,7 @@ const MessageComments = ({ message, onComment }) => {
             name="text"
             onChange={(e) => setText(e.target.value)}
             value={text}
-            placeholder={`comment on the post ${message.userfirstName} ...`}
+            placeholder={`comment on the post ${message.firstName} ...`}
             aria-label="write your comment"
             tabIndex={8}
           />

@@ -7,8 +7,6 @@ import config from "../config";
 const Content = ({ data, onSent, showSearch, darkmode }) => {
   const [filter, setFilter] = useState("");
 
-  console.log("data", data);
-
   const handleDelete = (messageId) => {
     axios.delete(config.BACK_URL + "/messages/" + messageId, config.axios).then((res) => {
       onSent();
@@ -28,6 +26,7 @@ const Content = ({ data, onSent, showSearch, darkmode }) => {
     setFilter(filter.trim().toLowerCase());
   };
 
+  console.log("styles.searchBarContainer", styles.searchBarContainer)
   return (
     <div className={`${styles.content} flex-fill  `}>
       <div className={styles.card}>
@@ -44,8 +43,7 @@ const Content = ({ data, onSent, showSearch, darkmode }) => {
             )}
           </div>
           {data
-            .sort((a, b) => new Date(b.date) - new Date(a.date))
-            .filter((message) => message.userfirstName.toLowerCase().startsWith(filter))
+            .filter((message) => message.firstName.toLowerCase().startsWith(filter))
 
             .map((message) => (
               <Message

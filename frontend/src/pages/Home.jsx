@@ -20,6 +20,7 @@ const Home = () => {
     <div className={`d-flex flex-column ${styles.appContainer}`}>
       <Header showSearch={showSearch} setShowSearch={setShowSearch} darkmode={darkmode} setDarkmode={setDarkmode} />
       <Form onSent={() => refetch()} darkmode={darkmode} setDarkmode={setDarkmode} />
+      
       {isSuccess && !isLoading && data.data ? (
         <Content
           data={data.data}
