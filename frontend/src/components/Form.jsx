@@ -13,11 +13,11 @@ const Form = ({ onSent, darkmode }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let data = new FormData();
-    data.append("image", files);
-    data.append("authMsg", content);
-    data.append("firstName", firstName);
-    data.append("lastName", lastName);
-    data.append("userImage", image);
+    // data.append("image", files);
+    data.append("content", content);
+    // data.append("userImage", image);
+    // FIXME userID is missing or null
+    
     data.append("userId", userId);
 
     await axios.post(config.BACK_URL + "/messages/", data, config.axios);

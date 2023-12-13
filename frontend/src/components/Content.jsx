@@ -13,13 +13,6 @@ const Content = ({ data, onSent, showSearch, darkmode }) => {
     });
   };
 
-  const handleLike = () => {
-    onSent();
-  };
-
-  const handleComment = () => {
-    onSent();
-  };
 
   const handleInput = (e) => {
     const filter = e.target.value;
@@ -32,26 +25,12 @@ const Content = ({ data, onSent, showSearch, darkmode }) => {
       <div className={styles.card}>
         <div className={darkmode ? styles.gridDark : styles.grid}>
           <div className={styles.searchBarContainer}>
-            {/* Condition to display search bar */}
-            {showSearch ? (
-              <div className={`d-flex flex-row justify-content-center align-item-center my-30  ${darkmode ? styles.searchBarDark : styles.searchBar}`}>
-                <i className="fa-solid fa-magnifying-glass mr-15"></i>
-                <input onInput={handleInput} className="flex-fill" type="text" placeholder="To research" />
-              </div>
-            ) : (
-              ""
-            )}
           </div>
           {data
-            .filter((message) => message.firstName.toLowerCase().startsWith(filter))
-
             .map((message) => (
               <Message
                 key={message.id}
                 message={message}
-                onDelete={() => handleDelete(message.id)}
-                onLike={() => handleLike()}
-                onComment={() => handleComment()}
               />
             ))}
         </div>

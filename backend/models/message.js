@@ -9,30 +9,30 @@ const { Model, DataTypes } = require('sequelize');
 // });
 module.exports = (sequelize, DataTypes) => {
 
-  class Message extends Model { }
+  class Message extends Model { 
+    static associate(models) {
+      Message.belongsTo(models.User, {
+          foreignKey: 'userId',
+          onDelete: 'CASCADE',
+          allowNull: false,
+      });
+    }
+  }
 
   Message.init({
     // Model attributes are defined here
-    firstName: {
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    content: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    lastName: {
+    mediaUrl: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
-    authMsg: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    imgUrl: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    active: {
-      type: DataTypes.BOOLEAN,
-      default: true
-    }
   },
     {
       // Other model options go here

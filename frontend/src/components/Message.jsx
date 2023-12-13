@@ -2,40 +2,15 @@ import React, { useState, useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import styles from "./Message.module.scss";
-import EditingButtons from "./EditingButtons";
-import MessageComments from "./MessageComments";
+// import MessageComments from "./MessageComments";
 import config from "../config";
 
-const Message = ({ message, onDelete, onLike, onComment }) => {
-  const { userId, isAdmin } = useContext(AppContext);
+const Message = ({ message, onDelete }) => {
+  const { userId, setIsUserId } = useContext(AppContext);
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState("");
   const [showComments, setShowComments] = useState(false);
 
-  const handleEdit = () => {
-    const data = {
-      content: editContent ? editContent : message.content,
-    };
-
-    axios.put(config.BACK_URL + "/messages/" + message.id, data, config.axios);
-
-    setIsEditing(false);
-  };
-
-  const likeClick = () => {
-    let param = {
-      messageId: message.id,
-    };
-
-    axios
-      .post(config.BACK_URL + "/messages/like", param, config.axios)
-      .then((res) => {
-        onLike();
-      })
-      .catch((err) => {
-        console.error(" error ", err);
-      });
-  };
 
   // Format date for messages timestamps //
 
@@ -59,23 +34,10 @@ const Message = ({ message, onDelete, onLike, onComment }) => {
             <b>{message.lastName}</b>
           </div>
         </div>
-        <div className={`mr-15 ${styles.editBtn}`}></div>
-        {/* displaying edit and delete buttons if user is poster or admin */}
-        {userId === message.userId || isAdmin === true ? (
-          <EditingButtons isEditing={isEditing} handleEdit={handleEdit} setIsEditing={setIsEditing} onDelete={onDelete} />
-        ) : null}
       </div>
 
       <div className={`${styles.messageContent} d-flex flex-column justify-content-center align-items-center `}>
-        {isEditing ? (
-          <textarea
-            className={styles.textMessage}
-            defaultValue={editContent ? editContent : message.authMsg}
-            onChange={(e) => setEditContent(e.target.value)}
-          ></textarea>
-        ) : (
-          <p className={styles.textMessage}>{editContent ? editContent : message.authMsg}</p>
-        )}
+        <p className={styles.textMessage}>{editContent ? editContent : message.content}</p>
 
         {message.imageUrl ? (
           <div className={styles.imageContainer}>
@@ -84,20 +46,6 @@ const Message = ({ message, onDelete, onLike, onComment }) => {
         ) : (
           ""
         )}
-
-        <div className={`${styles.commentsLikesBox} p-30`}>
-          <div>
-            <i
-              onClick={() => setShowComments(!showComments)}
-              onKeyDown={() => setShowComments(!showComments)}
-              className="mr-5 fa-regular fa-comment"
-              aria-label="comment on the post"
-              tabIndex={8}
-            ></i>
-            <span>{message.comments.length ? message.comments.length : ""}</span>
-          </div>
-        </div>
-        {showComments && <MessageComments message={message} onComment={onComment} />}
       </div>
     </div>
   );

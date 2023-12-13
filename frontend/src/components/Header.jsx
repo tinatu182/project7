@@ -18,14 +18,6 @@ const Header = ({ showSearch, setShowSearch }) => {
     <header className={`${styles.header} d-flex flex-row align-items-center  `}>
       <img className="logo" src={logo} alt="logo groupomania" />
       <div t className="flex-fill"></div>
-
-      <i
-        onClick={() => setShowSearch(!showSearch)}
-        onKeyDown={() => setShowSearch(!showSearch)}
-        className={`fa-solid fa-magnifying-glass btn-round  ${styles.searchGlass}`}
-        aria-label="enable search bar"
-        tabIndex={2}
-      ></i>
       <ul className={styles.headerList}>
         <NavLink to="/profile">
           <button className="btn btn-reverse-primary mr-15" tabIndex={3}>
