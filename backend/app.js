@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 // app.use('/api/sauces', sauceRouter);
 app.use('/api/auth', userRouter);
 app.use('/api/messages', messageRouter);
-app.use('/images', express.static(path.join(__dirname, 'images')))
+app.use('/uploads', express.static(path.join(__dirname, 'uploads/')))
 
 module.exports = app;
 

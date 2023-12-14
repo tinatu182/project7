@@ -31,10 +31,10 @@ const Login = () => {
         let data = res.data;
 
         /** Save token in config module */
-        config.axios.headers.Authorization = data.token;
+        config.axios.headers.Authorization = "bear " + data.token;
 
         /** Save token in cookie for session persistence */
-        tools.setCookie("groupomania-token", data.token, 86400000);
+        tools.setCookie("groupomania-token", "bear " + data.token, 86400000);
 
         /** Call "displayuser" to pass values to Use Context  */
         displayUser(data.user);

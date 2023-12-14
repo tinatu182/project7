@@ -8,19 +8,20 @@ import config from "../config";
 const Form = ({ onSent, darkmode }) => {
   const { firstName, lastName, image, userId } = useContext(AppContext);
   const [content, setContent] = useState("");
-  const [files, setFiles] = useState({});
+  const [files, setFiles] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Herere as", files)
     let data = new FormData();
-    // data.append("image", files);
+    data.append("media", files);
     data.append("content", content);
     // data.append("userImage", image);
     // FIXME userID is missing or null
     
     data.append("userId", userId);
 
-    await axios.post(config.BACK_URL + "/messages/", data, config.axios);
+    await axios.post(config.BACK_URL + "/messages/", data, config.axiosFile);
     setContent("");
     setFiles("");
     onSent();

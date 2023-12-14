@@ -58,18 +58,13 @@ const Profile = () => {
     <div className={styles.background}>
       <img className={styles.backgroundImg} src={backgroundImg} alt="lines" />
       <form onSubmit={(e) => handleSubmit(e)} className={styles.loginForm}>
-        <img className={` ${styles.userimg}`} src={image} alt="avatar" />
         <div className={styles.userName}>
           <span>{firstName} </span>
           <span>{lastName}</span>
 
           <div className={styles.userStatus}>{isAdmin === true ? <div>status: Administrator</div> : <div>status: User</div>}</div>
         </div>
-        <FileUpload files={files} onFileSelected={(file) => setFiles(file)} />
 
-        <button className={`btn btn-reverse-primary ${styles.submitBtn}`} type="submit" value="Publish" aria-label="edit your profile">
-          <span>EDIT</span>
-        </button>
         <Error error={error} />
         <div className={styles.deleteLink}>
           <p onClick={handleDelete}>Delete account</p>

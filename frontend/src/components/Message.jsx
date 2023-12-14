@@ -27,11 +27,10 @@ const Message = ({ message, onDelete }) => {
   return (
     <div className={styles.message}>
       <div className={` d-flex  align-items-center  ${styles.userBox}`}>
-        <img className={`${styles.userImg}`} src={message.userImage} alt="avatar" />
         <div className={styles.signature}>
           <div className={styles.signatureName}>
-            <b>{message.firstName} </b>
-            <b>{message.lastName}</b>
+            <b>{message.User.firstName} </b>
+            <b>{message.User.lastName}</b>
           </div>
         </div>
       </div>
@@ -39,9 +38,9 @@ const Message = ({ message, onDelete }) => {
       <div className={`${styles.messageContent} d-flex flex-column justify-content-center align-items-center `}>
         <p className={styles.textMessage}>{editContent ? editContent : message.content}</p>
 
-        {message.imageUrl ? (
+        {message.mediaUrl ? (
           <div className={styles.imageContainer}>
-            <img className={styles.messageImg} src={message.imageUrl} alt="message" />
+            <img className={styles.messageImg} src={message.mediaUrl} alt="message" />
           </div>
         ) : (
           ""

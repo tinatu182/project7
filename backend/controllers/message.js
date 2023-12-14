@@ -1,4 +1,4 @@
-const { Message } = require("../models");
+const { User, Message } = require("../models");
 
 exports.createMsg = (req, res, next) => {
     // TODO update handle media 
@@ -7,11 +7,17 @@ exports.createMsg = (req, res, next) => {
 
 
     const msgObject = req.body;
+    const url = req.protocol + '://' + req.get('host');  // get url from req
 
     const msg = new Message({
         ...msgObject,
-        mediaUrl: "",
+        mediaUrl: url + '/uploads/' + req.file.filename,
     });
+
+    console.log("*************** here asdas ", {
+        ...msgObject,
+        mediaUrl: url + '/uploads/' + req.file.filename,
+    })
     msg
         .save()
         .then(() => {
@@ -25,7 +31,7 @@ exports.createMsg = (req, res, next) => {
 
 exports.getAllMsg = (req, res, next) => {
     Message.findAll({ 
-        raw: true,
+        include: [{model: User, attributes: ['firstName', 'lastName']}]
     }).then((messages) => {
         // console.log("DATADAD RETURN ", messages)
         res.status(200).json(messages)

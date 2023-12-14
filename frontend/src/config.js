@@ -10,6 +10,12 @@ const config = {
       "Content-Type": "application/json",
     },
   },
+  axiosFile: {
+    headers: {
+      Authorization: null,
+      "Content-Type": 'multipart/form-data',
+    },
+  }
 };
 
 export default config;

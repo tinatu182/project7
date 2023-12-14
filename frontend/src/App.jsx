@@ -28,7 +28,7 @@ const App = () => {
   /** Setting cookie in Config module */
   if (tokenCookie) {
     config.axios.headers.Authorization = tokenCookie;
-
+    config.axiosFile.headers.Authorization = tokenCookie;
     /** Get user in Backend  */
     axios
       .get(config.BACK_URL + "/auth/", config.axios)
