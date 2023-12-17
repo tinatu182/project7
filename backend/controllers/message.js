@@ -1,4 +1,4 @@
-const { User, Message } = require("../models");
+const { User, Message, Ledger } = require("../models");
 
 exports.createMsg = (req, res, next) => {
     // TODO update handle media 
@@ -31,10 +31,22 @@ exports.createMsg = (req, res, next) => {
 
 exports.getAllMsg = (req, res, next) => {
     Message.findAll({ 
-        include: [{model: User, attributes: ['firstName', 'lastName']}]
+        include: [{model: User, attributes: ['firstName', 'lastName']},
+                    {model: Ledger, attributes: ['userId', 'read']}],
+        // order: [['read', 'ASC']]
     }).then((messages) => {
         // console.log("DATADAD RETURN ", messages)
         res.status(200).json(messages)
     });
 
+}
+
+exports.readMessage = (req, res, next) => {
+    console.log("*****************", req.body)
+    const ledgerObject = req.body;
+    const ledger = new Ledger(ledgerObject);
+    console.log("hehehelo9", ledgerObject, ledger)
+    ledger.save().then((ret) => {
+        res.status(200).json({"msg": "Update successful!"})
+    }) 
 }

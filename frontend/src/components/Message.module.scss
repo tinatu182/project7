@@ -29,7 +29,7 @@
   }
 }
 
-.imageContainer {
+.contentContainer {
   overflow: hidden;
 
   .messageImg {
@@ -76,4 +76,13 @@
 
 .imageContainer {
   height: 380px;
+}
+
+.videoContainer {
+  height: 380px;
+  width: 500px;
+}
+
+.mediaContainer {
+  width: 500px;
 }

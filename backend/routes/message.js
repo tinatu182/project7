@@ -6,5 +6,6 @@ const auth = require("../middleware/auth");
 
 router.post("/", auth, multer, messageCtrl.createMsg)
 router.get("/", messageCtrl.getAllMsg)
+router.post("/read", auth, messageCtrl.readMessage)
 
 module.exports = router

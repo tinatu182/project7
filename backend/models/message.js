@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
           onDelete: 'CASCADE',
           allowNull: false,
       });
+      Message.hasMany(models.Ledger, {
+        foreignKey: 'ledgerId'
+      });
     }
   }
 
