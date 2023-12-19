@@ -7,7 +7,7 @@ import tools from "../tools";
 import config from "../config";
 import HeaderMenu from "./HeaderMenu";
 
-const Header = ({ showSearch, setShowSearch }) => {
+const Header = () => {
   const handleLogout = () => {
     tools.setCookie(config.APP_NAME + "-token", "");
   };

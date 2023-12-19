@@ -2,7 +2,6 @@ let exp = {
   getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
-    console.log("COOCKLCSDSDSD", decodedCookie)
     let ca = decodedCookie.split(";");
     for (let i = 0; i < ca.length; i++) {
       let c = ca[i];

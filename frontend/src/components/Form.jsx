@@ -5,19 +5,16 @@ import styles from "./Form.module.scss";
 import FileUpload from "./FileUpload";
 import config from "../config";
 
-const Form = ({ onSent, darkmode }) => {
+const Form = ({ onSent}) => {
   const { firstName, lastName, image, userId } = useContext(AppContext);
   const [content, setContent] = useState("");
   const [files, setFiles] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Herere as", files)
     let data = new FormData();
     data.append("media", files);
     data.append("content", content);
-    // data.append("userImage", image);
-    // FIXME userID is missing or null
     
     data.append("userId", userId);
 
@@ -28,17 +25,14 @@ const Form = ({ onSent, darkmode }) => {
   };
 
   return (
-    <div className={darkmode ? styles.backgroundFormDark : ""}>
+    <div>
       <form className={`p-20  ${styles.form}`} onSubmit={(e) => handleSubmit(e)}>
         <div className={` ${styles.formContainer} d-flex `}>
-          <div className={` ${styles.userBox}  `}>
-            <img className={` ${styles.userimg}  `} src={image} alt="avatar" />
-          </div>
           <textarea
             tabIndex={5}
-            className={darkmode ? styles.textFormDark : styles.textForm}
+            className={styles.textForm}
             autoFocus
-            placeholder={`Exchange with your colleagues ${firstName}...`}
+            placeholder={`Exchange with your colleagues ${firstName} ${lastName} ...`}
             onChange={(e) => setContent(e.target.value)}
             value={content}
             aria-label="write your message"

@@ -17,7 +17,7 @@ exports.signUp = (req, res, next) => {
                 .save()
                 .then(() => res.status(201).json({ message: "user created !" }))
                 .catch((error) => {
-                    console.log("ererehre ", error)
+                    console.log("signUp Error : ", error)
                     res.status(400).json({ error: "email address already in use" })
                 });
         })
@@ -45,17 +45,19 @@ exports.logIn = (req, res, next) => {
                     });
                 })
                 .catch((error) => {
-                    console.log("error", error)
+                    console.log("logIn error : ", error)
                     res.status(500).json({ error })
                 })
         })
         .catch((error) => {
-            console.log("error", error)
+            console.log("logIn error : ", error)
             res.status(500).json({ error })
         });
 };
 
 exports.deleteUser = (req, res, next) => {
+    // FIXME check to see user login match the id to be del id to be del id: req userId 
+    // the id of user log in is     req.authID 
     User.findOne({ where: { id: req.params.id } }).then((user) => {
         user
             .destroy()
@@ -66,7 +68,7 @@ exports.deleteUser = (req, res, next) => {
     });
 };
 
-// User routes
+// User routes   // no longer user
 // GET route displays individual user information
 exports.userEdit = async (req, res) => {
     const userId = req.params.userId; // Get userId from request parameters
@@ -114,5 +116,29 @@ exports.userEdit = async (req, res) => {
             res.status(400).json({
                 error: error.message || 'Failed to update profile.',
             });
+        });
+};
+
+// Get Auth user data
+// passing Bear auth Code to verify then parse userID to query DB
+// Return User information
+exports.getAuth = (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.KEY);
+    const userId = decodedToken.userId;
+
+    User.findOne({ where: { id: userId } })
+        .then((user) => {
+            if (!user) {
+                return res.status(403).json({ error: "invalid user" });
+            }
+
+            res.status(200).json({
+                user: user
+            });
+        })
+        .catch((error) => {
+            console.log("getAuth Error", error)
+            res.status(500).json({ error })
         });
 };

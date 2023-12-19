@@ -1,23 +1,17 @@
 const { User, Message, Ledger } = require("../models");
+const jwt = require("jsonwebtoken");
 
+// Create poster
+// Support Video MP4, Media Mp3, just text
 exports.createMsg = (req, res, next) => {
-    // TODO update handle media 
-    // TODO look on project 6 sauces
-    // upload button on media
-
-
     const msgObject = req.body;
-    const url = req.protocol + '://' + req.get('host');  // get url from req
+    const url = req.protocol + '://' + req.get('host');
 
     const msg = new Message({
         ...msgObject,
-        mediaUrl: url + '/uploads/' + req.file.filename,
+        mediaUrl: req.file ? url + '/uploads/' + req.file.filename : "",
     });
 
-    console.log("*************** here asdas ", {
-        ...msgObject,
-        mediaUrl: url + '/uploads/' + req.file.filename,
-    })
     msg
         .save()
         .then(() => {
@@ -29,24 +23,33 @@ exports.createMsg = (req, res, next) => {
         });
 };
 
+// Get All Poster
+// find all poster msg with ledger user who read the post
 exports.getAllMsg = (req, res, next) => {
-    Message.findAll({ 
-        include: [{model: User, attributes: ['firstName', 'lastName']},
-                    {model: Ledger, attributes: ['userId', 'read']}],
-        // order: [['read', 'ASC']]
+    const token = req.headers.authorization.split(' ')[1];
+    const decodedToken = jwt.verify(token, process.env.KEY);
+    const userId = decodedToken.userId;
+
+    Message.findAll({
+        order: [["createdAt", "DESC"]],
+        include: [{ model: User, attributes: ['firstName', 'lastName'] },
+        { model: Ledger, attributes: ['userId', 'read'] }]
     }).then((messages) => {
-        // console.log("DATADAD RETURN ", messages)
+        // Logic to checking currently read or not
+        messages.map(message => {
+            message.dataValues.isRead = message.Ledgers.some(ledger => ledger.userId === userId)
+        })
         res.status(200).json(messages)
     });
 
 }
 
+
+// Create ledger userID tight to Poster Msg ID
 exports.readMessage = (req, res, next) => {
-    console.log("*****************", req.body)
     const ledgerObject = req.body;
     const ledger = new Ledger(ledgerObject);
-    console.log("hehehelo9", ledgerObject, ledger)
     ledger.save().then((ret) => {
-        res.status(200).json({"msg": "Update successful!"})
-    }) 
+        res.status(200).json({ "msg": "Update successful!" })
+    })
 }

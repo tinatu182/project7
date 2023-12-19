@@ -9,8 +9,6 @@ import styles from "../App.module.scss";
 import Form from "../components/Form";
 
 const Home = () => {
-  const [showSearch, setShowSearch] = useState(false);
-  const [darkmode, setDarkmode] = useState(false);
 
   const fetchData = async () => await axios.get(config.BACK_URL + "/messages/", config.axios);
 
@@ -18,17 +16,12 @@ const Home = () => {
 
   return (
     <div className={`d-flex flex-column ${styles.appContainer}`}>
-      <Header showSearch={showSearch} setShowSearch={setShowSearch} darkmode={darkmode} setDarkmode={setDarkmode} />
-      <Form onSent={() => refetch()} darkmode={darkmode} setDarkmode={setDarkmode} />
+      <Header />
+      <Form onSent={() => refetch()}/>
       
       {isSuccess && !isLoading && data.data ? (
         <Content
           data={data.data}
-          onSent={() => refetch()}
-          showSearch={showSearch}
-          setShowSearch={setShowSearch}
-          darkmode={darkmode}
-          setDarkmode={setDarkmode}
         />
       ) : (
         <div className="">"Loading"</div>

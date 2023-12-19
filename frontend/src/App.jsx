@@ -16,9 +16,7 @@ const App = () => {
   const displayUser = (user) => {
     setfirstName(user.firstName);
     setlastName(user.lastName);
-    setImage(user.imageUrl);
     setUserId(user.id);
-    setisAdmin(user.isAdmin);
   };
 
   /** Getting cookie */
@@ -34,7 +32,7 @@ const App = () => {
       .get(config.BACK_URL + "/auth/", config.axios)
       .then((res) => {
         /** set user in context  */
-        displayUser(res.data);
+        displayUser(res.data.user);
       })
       .catch((err) => {
         console.error("auth/ ERROR", err);
@@ -46,9 +44,7 @@ const App = () => {
 
   const [firstName, setfirstName] = useState(null);
   const [lastName, setlastName] = useState(null);
-  const [image, setImage] = useState(null);
   const [userId, setUserId] = useState(null);
-  const [isAdmin, setisAdmin] = useState(null);
   const queryClient = new QueryClient();
 
   return (
@@ -59,9 +55,7 @@ const App = () => {
             displayUser,
             firstName,
             lastName,
-            image,
-            userId,
-            isAdmin,
+            userId
           }}
         >
           <Routes>
