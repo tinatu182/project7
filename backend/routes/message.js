@@ -5,7 +5,7 @@ const multer = require("../middleware/multer-config");
 const auth = require("../middleware/auth");
 
 router.post("/", auth, multer, messageCtrl.createMsg)
-router.get("/", messageCtrl.getAllMsg)
+router.get("/", auth, messageCtrl.getAllMsg)
 router.post("/read", auth, messageCtrl.readMessage)
 
 module.exports = router

@@ -3,7 +3,7 @@ import { AppContext } from "../context/AppContext";
 import styles from "./Content.module.scss";
 import Message from "./Message";
 
-const Content = ({ data, darkmode }) => {
+const Content = ({ data, darkmode=false }) => {
   const { userId, setIsUserId } = useContext(AppContext);
 
   return (

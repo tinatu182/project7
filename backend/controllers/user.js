@@ -58,6 +58,9 @@ exports.logIn = (req, res, next) => {
 exports.deleteUser = (req, res, next) => {
     // FIXME check to see user login match the id to be del id to be del id: req userId 
     // the id of user log in is     req.authID 
+    if (req.authID != req.param.id){
+        return res.status(400).json({ message: "User not existed !" });
+    }
     User.findOne({ where: { id: req.params.id } }).then((user) => {
         user
             .destroy()
@@ -127,7 +130,7 @@ exports.getAuth = (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.KEY);
     const userId = decodedToken.userId;
 
-    User.findOne({ where: { id: userId } })
+    User.findOne({ where: { id: req.authID } })
         .then((user) => {
             if (!user) {
                 return res.status(403).json({ error: "invalid user" });

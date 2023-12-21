@@ -26,10 +26,6 @@ exports.createMsg = (req, res, next) => {
 // Get All Poster
 // find all poster msg with ledger user who read the post
 exports.getAllMsg = (req, res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, process.env.KEY);
-    const userId = decodedToken.userId;
-
     Message.findAll({
         order: [["createdAt", "DESC"]],
         include: [{ model: User, attributes: ['firstName', 'lastName'] },
@@ -37,7 +33,7 @@ exports.getAllMsg = (req, res, next) => {
     }).then((messages) => {
         // Logic to checking currently read or not
         messages.map(message => {
-            message.dataValues.isRead = message.Ledgers.some(ledger => ledger.userId === userId)
+            message.dataValues.isRead = message.Ledgers.some(ledger => ledger.userId === req.authID)
         })
         res.status(200).json(messages)
     });
