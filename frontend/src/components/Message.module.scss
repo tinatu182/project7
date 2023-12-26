@@ -25,12 +25,13 @@
     flex-direction: column;
   }
   @include mixin.xs {
+    width: 100%;
     font-size: 15px;
   }
 }
 
 .signatureName {
-  width: 575px;
+  width: 100%;
 }
 
 .contentContainer {
@@ -83,10 +84,9 @@
 }
 
 .videoContainer {
-  height: 380px;
-  width: 500px;
+  width: 100%;
 }
 
 .mediaContainer {
-  width: 500px;
+  width: 100%;
 }
