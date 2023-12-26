@@ -3,7 +3,6 @@ import { AppContext } from "../context/AppContext";
 import { FaEnvelopeOpen, FaEnvelope } from 'react-icons/fa';
 import axios from "axios";
 import styles from "./Message.module.scss";
-// import MessageComments from "./MessageComments";
 import config from "../config";
 
 const Message = ({ message, isRead }) => {

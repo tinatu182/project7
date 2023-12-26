@@ -6,12 +6,15 @@
   width: 650px;
   cursor: pointer;
   background-color: white;
+
   @include mixin.lg-lt {
     width: 500px;
   }
+
   @include mixin.sm-lt {
     width: 400px;
   }
+
   @include mixin.xs {
     width: 350px;
   }
@@ -21,9 +24,11 @@
   display: flex;
   flex-direction: row;
   padding-left: 20px;
+
   @include mixin.lg-lt {
     flex-direction: column;
   }
+
   @include mixin.xs {
     width: 100%;
     font-size: 15px;
@@ -63,16 +68,11 @@
     height: 70px;
     border-radius: 50%;
     object-fit: cover;
+
     @include mixin.lg-lt {
       margin-right: 0px;
     }
   }
-}
-
-.commentsLikesBox {
-  display: flex;
-  justify-content: space-between;
-  width: 140px;
 }
 
 .heartPrimary {
