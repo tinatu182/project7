@@ -40,7 +40,7 @@ const Message = ({ message, isRead }) => {
           </div>
           <div>
               {collapsed ?
-                <FaEnvelopeOpen color="green" size={30}/>
+                <FaEnvelopeOpen color="gray" size={30}/>
                 :
                 <FaEnvelope color="red" size={30} onClick={handleRead}/>
               }
