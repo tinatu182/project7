@@ -12,6 +12,10 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 
 const App = () => {
+  const [firstName, setfirstName] = useState(null);
+  const [lastName, setlastName] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const queryClient = new QueryClient();
   // Function for use context datas*/
   const displayUser = (user) => {
     setfirstName(user.firstName);
@@ -42,10 +46,7 @@ const App = () => {
     if (!config.public_path.includes(route)) window.location.href = config.FRONT_URL + "/login";
   }
 
-  const [firstName, setfirstName] = useState(null);
-  const [lastName, setlastName] = useState(null);
-  const [userId, setUserId] = useState(null);
-  const queryClient = new QueryClient();
+
 
   return (
     <QueryClientProvider client={queryClient}>

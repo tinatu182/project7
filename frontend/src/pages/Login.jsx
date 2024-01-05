@@ -12,7 +12,7 @@ import Error from "../components/Error";
 const Login = () => {
   const emailRef = useRef();
   const [email, setEmail] = useState("tester@na.com");
-  const [password, setPassword] = useState("Tester123456");
+  const [password, setPassword] = useState("Tester123");
   const [error, setError] = useState();
   const [success, setSuccess] = useState(false);
   const { displayUser } = useContext(AppContext);
