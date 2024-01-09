@@ -57,7 +57,7 @@ exports.logIn = (req, res, next) => {
 
 exports.deleteUser = (req, res, next) => {
     // the id of user log in is     req.authID 
-    if (req.authID != req.param.id){
+    if (req.authID != req.params.id){
         return res.status(400).json({ message: "User not existed !" });
     }
     User.findOne({ where: { id: req.params.id } }).then((user) => {
