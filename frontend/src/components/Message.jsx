@@ -11,11 +11,11 @@ const Message = ({ message, isRead }) => {
 
 
   let content;
-  if (message.mediaUrl.endsWith('.mp4')){
+  if (message.mediaUrl.endsWith('.mp4')) {
     content = <video controls className={`${styles.contentContainer} ${styles.videoContainer}`}><source src={message.mediaUrl} type="video/mp4" /></video>
-  }else if (message.mediaUrl.endsWith('.mp3')){
+  } else if (message.mediaUrl.endsWith('.mp3')) {
     content = <audio controls className={`${styles.contentContainer} ${styles.mediaContainer}`}><source src={message.mediaUrl} type="audio/mpeg" /></audio>
-  }else{
+  } else {
     content = <div className={`${styles.contentContainer} ${styles.imageContainer}`}><img className={styles.messageImg} src={message.mediaUrl} alt="message" /></div>;
   }
 
@@ -39,12 +39,12 @@ const Message = ({ message, isRead }) => {
             <b>{message.User.lastName}</b>
           </div>
           <div>
-              {collapsed ?
-                <FaEnvelopeOpen color="gray" size={30}/>
-                :
-                <FaEnvelope color="red" size={30} onClick={handleRead}/>
-              }
-            </div>
+            {collapsed ?
+              <FaEnvelopeOpen color="gray" size={30} />
+              :
+              <FaEnvelope color="red" size={30} onClick={handleRead} />
+            }
+          </div>
         </div>
       </div>
       {collapsed && (
