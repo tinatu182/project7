@@ -56,7 +56,6 @@ exports.logIn = (req, res, next) => {
 };
 
 exports.deleteUser = (req, res, next) => {
-    // FIXME check to see user login match the id to be del id to be del id: req userId 
     // the id of user log in is     req.authID 
     if (req.authID != req.param.id){
         return res.status(400).json({ message: "User not existed !" });

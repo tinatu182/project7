@@ -1,6 +1,3 @@
-
-
-
 CREATE TABLE IF NOT EXISTS public."Users"
 (
     id integer NOT NULL DEFAULT nextval('"Users_id_seq"'::regclass),
