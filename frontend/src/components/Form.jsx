@@ -29,7 +29,7 @@ const Form = ({ onSent}) => {
       <form className={`p-20  ${styles.form}`} onSubmit={(e) => handleSubmit(e)}>
         <div className={` ${styles.formContainer} d-flex `}>
           <textarea
-            tabIndex={5}
+            tabIndex={0}
             className={styles.textForm}
             autoFocus
             placeholder={`Exchange with your colleagues ${firstName} ${lastName} ...`}

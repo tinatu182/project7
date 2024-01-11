@@ -12,7 +12,7 @@
   }
 
   img {
-    width: 210px;
+    width: 150px;
 
     @include mixin.sm-lt {
       width: 180px;

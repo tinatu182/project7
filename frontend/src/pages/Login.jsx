@@ -5,7 +5,7 @@ import axios from "axios";
 import config from "../config";
 import styles from "./Login.module.scss";
 import tools from "../tools";
-import logo from "../assets/images/icon-left-font-monochrome-white.png";
+import logo from "../assets/images/icon-left-font-monochrome-black.png";
 import backgroundImg from "../assets/images/background.jpg";
 import Error from "../components/Error";
 

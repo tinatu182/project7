@@ -42,7 +42,7 @@ const Message = ({ message, isRead }) => {
             {collapsed ?
               <FaEnvelopeOpen color="gray" size={30} />
               :
-              <FaEnvelope color="red" size={30} onClick={handleRead} />
+              <FaEnvelope color="#A80000" size={30} onClick={handleRead} />
             }
           </div>
         </div>

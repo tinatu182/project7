@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styles from "./Signup.module.scss";
-import logo from "../assets/images/icon-left-font-monochrome-white.png";
+import logo from "../assets/images/icon-left-font-monochrome-black.png";
 import backgroundImg from "../assets/images/background.jpg";
 import Error from "../components/Error";
 
